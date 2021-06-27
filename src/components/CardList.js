@@ -7,7 +7,7 @@ export default class CardList extends Component {
         <div>
             {this.props.robots.map((robot, i) => {
             return <Card key={i} id={robot.id} name={robot.name} email={robot.email}/>
-        })};
+        })}
         </div>)
     };
 }

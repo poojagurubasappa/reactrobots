@@ -2,11 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './containers/App';
+import { Provider } from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import {searchRobots} from './reducers';
+import {createLogger} from 'redux-logger';
 
+const logger = createLogger();
+const store = createStore(searchRobots, applyMiddleware(logger)); //rootReducer; if there are multiple reducers, combine them to one root reducer
+
+//pass down the store to App
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App/>
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
