@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './containers/App';
 import { Provider } from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import {searchRobots} from './reducers';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {searchRobots, fetchRobots} from './reducers';
 import {createLogger} from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 
 const logger = createLogger();
-const store = createStore(searchRobots, applyMiddleware(logger)); //rootReducer; if there are multiple reducers, combine them to one root reducer
+const rootReducer = combineReducers({searchRobots, fetchRobots});
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger)); //rootReducer; if there are multiple reducers, combine them to one root reducer
 
 //pass down the store to App
 ReactDOM.render(
